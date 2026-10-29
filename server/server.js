@@ -1,6 +1,7 @@
 require("dotenv").config({ path: require("path").join(__dirname, ".env") });
 
 const mongoose = require("mongoose");
+const express = require("express");
 const { createApp, getAllowedOrigins } = require("./app");
 
 function validateProductionConfiguration() {
@@ -21,14 +22,9 @@ function validateProductionConfiguration() {
     throw new Error("Production startup requires explicit HTTPS CLIENT_ORIGIN values.");
   }
 }
-
 validateProductionConfiguration();
 
-const PORT = Number(process.env.PORT || 5000);
-if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) throw new Error("PORT must be an integer from 1 to 65535.");
-
-const app = createApp();
-const server = app.listen(PORT, () => console.log(`FreelancerHub API listening on port ${PORT}`));
+const app = createApp(express());
 
 async function connectToDatabase() {
   if (!process.env.MONGODB_URI) {
@@ -43,18 +39,26 @@ async function connectToDatabase() {
     console.error(`MongoDB connection failed (code: ${errorCode}). Check DNS, Atlas network access, and credentials locally; connection details are redacted.`);
   }
 }
+if (process.env.VERCEL) {
+  // Vercel invokes the exported Express app as a serverless function.
+  // MongoDB connects lazily in app middleware and is reused across warm requests.
+  module.exports = app;
+} else {
+  const PORT = Number(process.env.PORT || 5000);
+  if (!Number.isInteger(PORT) || PORT < 1 || PORT > 65535) throw new Error("PORT must be an integer from 1 to 65535.");
+  const server = app.listen(PORT, () => console.log(`FreelancerHub API listening on port ${PORT}`));
 
-async function shutdown(signal) {
-  console.log(`Received ${signal}; closing the API server.`);
-  server.close(async () => {
-    await mongoose.disconnect().catch(() => {});
-    process.exit(0);
-  });
-  setTimeout(() => process.exit(1), 10000).unref();
+  async function shutdown(signal) {
+    console.log(`Received ${signal}; closing the API server.`);
+    server.close(async () => {
+      await mongoose.disconnect().catch(() => {});
+      process.exit(0);
+    });
+    setTimeout(() => process.exit(1), 10000).unref();
+  }
+
+  process.once("SIGINT", () => shutdown("SIGINT"));
+  process.once("SIGTERM", () => shutdown("SIGTERM"));
+  connectToDatabase();
+  module.exports = { app, server };
 }
-
-process.once("SIGINT", () => shutdown("SIGINT"));
-process.once("SIGTERM", () => shutdown("SIGTERM"));
-connectToDatabase();
-
-module.exports = { app, server };

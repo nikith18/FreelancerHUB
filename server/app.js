@@ -2,8 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const helmet = require("helmet");
-const path = require("path");
-const fs = require("fs");
 const jobsRouter = require("./routes/jobs");
 const authRouter = require("./routes/auth");
 const applicationsRouter = require("./routes/applications");
@@ -15,24 +13,37 @@ const skillProofRouter = require("./routes/skillproof");
 const { apiLimiter } = require("./middleware/rate-limits");
 const { requireTrustedMutationOrigin } = require("./middleware/csrf");
 
+let databaseConnectionPromise;
+
+function connectForServerlessRequest() {
+  if (mongoose.connection.readyState === 1) return Promise.resolve();
+  if (!process.env.MONGODB_URI) return Promise.reject(new Error("MONGODB_URI is missing."));
+  if (!databaseConnectionPromise) {
+    databaseConnectionPromise = mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+      maxPoolSize: 5,
+    }).catch((error) => {
+      databaseConnectionPromise = null;
+      throw error;
+    });
+  }
+  return databaseConnectionPromise;
+}
+
 function getAllowedOrigins() {
   const configured = (process.env.CLIENT_ORIGIN || "")
     .split(",")
     .map((origin) => origin.trim())
     .filter(Boolean);
-  if (process.env.NODE_ENV === "production") {
-    const renderHostname = process.env.RENDER_EXTERNAL_HOSTNAME;
-    const renderOrigin = renderHostname ? `https://${renderHostname}` : null;
-    return [...new Set([...configured, ...(renderOrigin ? [renderOrigin] : [])])];
-  }
+  if (process.env.NODE_ENV === "production") return [...new Set(configured)];
   return [...new Set(["http://localhost:5173", "http://127.0.0.1:5173", ...configured])];
 }
 
-function createApp() {
-  const app = express();
+function createApp(app = express()) {
   const allowedOrigins = getAllowedOrigins();
 
   app.disable("x-powered-by");
+  if (process.env.VERCEL) app.set("trust proxy", 1);
   app.use(helmet({
     contentSecurityPolicy: false,
     strictTransportSecurity: process.env.NODE_ENV === "production",
@@ -46,6 +57,18 @@ function createApp() {
   }));
   app.use(express.json({ limit: "32kb", strict: true }));
   app.use(requireTrustedMutationOrigin(allowedOrigins));
+  if (process.env.VERCEL) {
+    app.use(async (req, res, next) => {
+      try {
+        await connectForServerlessRequest();
+        next();
+      } catch (error) {
+        const errorCode = error.code || error.cause?.code || error.name || "unknown";
+        console.error(`MongoDB connection failed (code: ${errorCode}). Connection details are redacted.`);
+        res.status(503).json({ success: false, message: "The database is temporarily unavailable." });
+      }
+    });
+  }
   app.use("/api", apiLimiter);
   app.use("/api/auth", authRouter);
   app.use("/api/jobs", jobsRouter);
@@ -66,16 +89,6 @@ function createApp() {
       database: databaseConnected ? "connected" : "disconnected",
     });
   });
-
-  // Render serves the API and Vite client from one origin in production.
-  // Keep API 404s as JSON and let the client router handle browser routes.
-  const clientDist = path.resolve(__dirname, "../client/dist");
-  if (process.env.NODE_ENV === "production" && fs.existsSync(clientDist)) {
-    app.use(express.static(clientDist, { index: false }));
-    app.get(/^(?!\/api(?:\/|$)).*/, (req, res) => {
-      res.sendFile(path.join(clientDist, "index.html"));
-    });
-  }
 
   app.use((req, res) => res.status(404).json({ success: false, message: "API endpoint not found." }));
   app.use((error, req, res, next) => {

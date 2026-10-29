@@ -54,6 +54,18 @@ Open `http://localhost:5173`. Vite proxies `/api` to `http://localhost:5000`. Fo
 
 The server exposes `GET /api/health`. It reports whether Mongoose is currently connected. This project setup guide does not run that check or connect to your database.
 
+## Vercel deployment
+
+Deploy this monorepo as two Vercel projects connected to the same GitHub repository. The API uses Vercel's Express runtime; the frontend is a Vite static site. The frontend project's `vercel.json` provides the client-side route fallback.
+
+1. Create the frontend project first with repository `nikith18/FreelancerHUB`, **Root Directory** `client`, and the Vite preset. Use `npm run build` and `dist` if Vercel does not detect them. The site can be created before its API is configured; its API calls will work after the next steps.
+2. Create a second Vercel project from the same repository with **Root Directory** `server`. Use Node.js 22 or newer. The `server.js` entry exports the Express app to Vercel and keeps the local `npm run dev` workflow intact.
+3. In the API project's Production environment, set `NODE_ENV=production`, `MONGODB_URI`, `JWT_SECRET` (at least 32 bytes), and `CLIENT_ORIGIN` to the frontend's exact HTTPS origin, such as `https://your-site.vercel.app`. Add secrets in Vercel Project Settings; never commit them.
+4. After the API project has a domain, set the frontend project's Production variable `VITE_API_URL` to `https://your-api.vercel.app/api`, then redeploy the frontend.
+5. Check `https://your-api.vercel.app/api/health`; success requires a live MongoDB connection.
+
+Vercel Hobby functions use dynamic outbound IP addresses. MongoDB Atlas IP allowlisting therefore requires Vercel Static IPs (a paid Vercel feature), or a broader Atlas network rule for a demo. If using a broad rule, protect the cluster with a unique, strong database-user password and grant only the database permissions the app needs. Do not use a production cluster with an unrestricted network rule.
+
 ## Accounts
 
 Public registration supports **Client** and **Freelancer**. It never accepts an Admin role. Admins are created only by the development seed script in this starter; set `DEMO_PASSWORD` first, then run:
