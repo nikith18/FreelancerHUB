@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #0f172a;
+  background: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --font-display: 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+  --font-body: Inter, system-ui, sans-serif;
+  --color-primary: #6366f1;
+  --color-primary-hover: #4f46e5;
+  --color-primary-active: #4338ca;
+  --color-primary-soft: #eef2ff;
+  --color-hero: #e8ecff;
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f1f5f9;
+  --color-glass-surface: rgb(255 255 255 / 78%);
+  --color-glass-border: rgb(203 213 225 / 78%);
+  --color-glass-hero: rgb(232 236 255 / 84%);
+  --color-glass-backdrop: rgb(248 250 252 / 90%);
+  --color-glass-modal: rgb(255 255 255 / 99%);
+  --color-text: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-surface-border: #d5deea;
+  --color-success: #059669;
+  --color-success-soft: #ecfdf5;
+  --color-warning: #d97706;
+  --color-error: #dc2626;
+  --color-error-soft: #fef2f2;
+  --radius-control: 10px;
+  --radius-card: 18px;
+  --radius-panel: 24px;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 6%), 0 8px 22px rgb(15 23 42 / 7%), inset 0 1px 0 rgb(255 255 255 / 90%);
+  --shadow-card-hover: 0 2px 5px rgb(15 23 42 / 8%), 0 16px 32px rgb(49 46 129 / 12%), inset 0 1px 0 rgb(255 255 255 / 95%);
+  --shadow-glass: inset 0 1px 0 rgb(255 255 255 / 92%), inset 0 -1px 0 rgb(255 255 255 / 38%), 0 1px 2px rgb(15 23 42 / 6%), 0 14px 32px rgb(15 23 42 / 9%);
+  --shadow-glass-hover: inset 0 1px 0 rgb(255 255 255 / 96%), inset 0 -1px 0 rgb(255 255 255 / 42%), 0 3px 7px rgb(15 23 42 / 8%), 0 18px 36px rgb(49 46 129 / 14%);
+  --shadow-raised: 0 2px 5px rgb(15 23 42 / 7%), 0 14px 38px rgb(49 46 129 / 12%), inset 0 1px 0 rgb(255 255 255 / 90%);
+  --shadow-dialog: 0 2px 8px rgb(15 23 42 / 12%), 0 28px 80px rgb(15 23 42 / 28%), inset 0 1px 0 rgb(255 255 255 / 90%);
+  --glow-primary-soft: 0 0 0 1px rgb(99 102 241 / 10%), 0 10px 30px rgb(99 102 241 / 9%);
+  --glow-primary-strong: 0 0 0 1px rgb(99 102 241 / 20%), 0 14px 34px rgb(99 102 241 / 16%);
+  --glow-control: 0 0 0 4px rgb(99 102 241 / 13%), 0 0 18px rgb(99 102 241 / 10%);
+  --content-width: 1240px;
+  --page-gutter: clamp(16px, 4vw, 48px);
+
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --color-primary: #4f46e5;
+  --color-primary-hover: #4338ca;
+  --color-primary-active: #3730a3;
+  --color-primary-soft: #252c50;
+  --color-hero: #171d38;
+  --color-background: #0b1220;
+  --color-surface: #111827;
+  --color-surface-muted: #172235;
+  --color-glass-surface: rgb(17 24 39 / 78%);
+  --color-glass-border: rgb(148 163 184 / 26%);
+  --color-glass-hero: rgb(23 29 56 / 84%);
+  --color-glass-backdrop: rgb(8 13 24 / 90%);
+  --color-glass-modal: rgb(17 24 39 / 99%);
+  --color-text: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-border: #273449;
+  --color-surface-border: #2b3950;
+  --color-success: #34d399;
+  --color-success-soft: #12352f;
+  --color-error: #f87171;
+  --color-error-soft: #3a2028;
+  --shadow-card: inset 0 1px 0 rgb(255 255 255 / 7%), inset 0 -1px 0 rgb(0 0 0 / 18%), 0 8px 20px rgb(0 0 0 / 34%);
+  --shadow-card-hover: inset 0 1px 0 rgb(255 255 255 / 10%), 0 14px 32px rgb(0 0 0 / 46%), 0 0 0 1px rgb(129 140 248 / 16%);
+  --shadow-glass: inset 0 1px 0 rgb(255 255 255 / 10%), inset 0 -1px 0 rgb(0 0 0 / 24%), 0 1px 2px rgb(0 0 0 / 18%), 0 14px 32px rgb(0 0 0 / 36%);
+  --shadow-glass-hover: inset 0 1px 0 rgb(255 255 255 / 14%), inset 0 -1px 0 rgb(0 0 0 / 25%), 0 3px 8px rgb(0 0 0 / 24%), 0 18px 36px rgb(0 0 0 / 48%);
+  --shadow-raised: inset 0 1px 0 rgb(255 255 255 / 8%), 0 14px 38px rgb(0 0 0 / 42%);
+  --shadow-dialog: inset 0 1px 0 rgb(255 255 255 / 8%), 0 28px 80px rgb(0 0 0 / 58%);
+  --glow-primary-soft: 0 0 0 1px rgb(129 140 248 / 13%), 0 10px 32px rgb(79 70 229 / 18%);
+  --glow-primary-strong: 0 0 0 1px rgb(165 180 252 / 26%), 0 14px 38px rgb(79 70 229 / 25%);
+  --glow-control: 0 0 0 4px rgb(129 140 248 / 19%), 0 0 20px rgb(99 102 241 / 16%);
+  color: var(--color-text);
+  background: var(--color-background);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--color-background);
+  color: var(--color-text);
+  font: 15px/1.6 var(--font-body);
+}
+
+body.dialog-open {
+  overflow: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+a,
+input,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+select {
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgb(99 102 241 / 48%);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+::selection {
+  color: #312e81;
+  background: #c7d2fe;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.glass-surface.glass-surface {
+  border-color: var(--color-glass-border);
+  background: var(--color-glass-surface);
+  box-shadow: var(--shadow-glass);
+  -webkit-backdrop-filter: blur(16px) saturate(138%);
+  backdrop-filter: blur(16px) saturate(138%);
+  transition: box-shadow .2s ease, backdrop-filter .2s ease;
+}
+
+.glass-surface.glass-surface:hover {
+  box-shadow: var(--shadow-glass-hover);
+  -webkit-backdrop-filter: blur(19px) saturate(152%);
+  backdrop-filter: blur(19px) saturate(152%);
+}
+
+:root[data-theme='dark'] .glass-surface.glass-surface {
+  border-color: var(--color-glass-border);
+  background: var(--color-glass-surface);
+  box-shadow: var(--shadow-glass);
+}
+
+:root[data-theme='dark'] .glass-surface.glass-surface:hover {
+  box-shadow: var(--shadow-glass-hover);
+}
+
+@supports not ((backdrop-filter: blur(1px))) {
+  .glass-surface.glass-surface { background: var(--color-surface); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

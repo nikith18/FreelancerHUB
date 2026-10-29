@@ -1,0 +1,71 @@
+.skillproof-card { scroll-margin-top: 22px; }
+.skillproof-intro { margin: -4px 0 16px; color: var(--color-text-secondary); font-size: 12px; }
+.skillproof-add-form { display: flex; align-items: end; gap: 10px; margin-bottom: 18px; }
+.skillproof-add-form label,.skillproof-filters label,.skillproof-review-reason { display: grid; min-width: 0; flex: 1; gap: 5px; color: var(--color-text-secondary); font-size: 11px; font-weight: 700; }
+.skillproof-add-form input,.skillproof-filters input,.skillproof-filters select,.skillproof-evidence-form input,.skillproof-evidence-form select,.skillproof-evidence-form textarea,.skillproof-review-reason textarea { width: 100%; min-height: 40px; padding: 9px 11px; border: 1px solid var(--color-border); border-radius: 9px; background: var(--color-surface); color: var(--color-text); font-size: 12px; }
+.skillproof-evidence-form textarea,.skillproof-review-reason textarea { resize: vertical; }
+.skillproof-legacy { margin: 10px 0 18px; padding: 13px; border: 1px solid var(--color-surface-border); border-radius: 12px; background: var(--color-surface-muted); box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%); }
+.skillproof-legacy h3 { margin: 0; font-size: 12px; }
+.skillproof-legacy p { margin: 3px 0 10px; color: var(--color-text-secondary); font-size: 11px; }
+.skillproof-legacy-list { display: flex; flex-wrap: wrap; gap: 7px; }
+.skillproof-legacy-chip { padding: 6px 9px; border: 1px solid var(--color-surface-border); border-radius: 999px; background: var(--color-surface); color: var(--color-text); cursor: pointer; font-size: 11px; box-shadow: var(--shadow-card); }
+.skillproof-legacy-chip span { color: var(--color-primary); font-weight: 700; }
+.skillproof-records { display: grid; gap: 12px; }
+.skillproof-record,.skillproof-admin-row { min-width: 0; padding: 15px; border: 1px solid var(--color-surface-border); border-radius: 13px; background: var(--color-surface); box-shadow: var(--shadow-card); }
+.skillproof-record-title { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.skillproof-record-title h3 { margin: 0; font-family: var(--font-display); font-size: 14px; }
+.skillproof-record-title p { margin: 3px 0 0; color: var(--color-text-secondary); font-size: 11px; }
+.skillproof-status-help { max-width: 680px; }
+.skillproof-feedback,.skillproof-verified-note,.skillproof-flag-note { margin: 11px 0; padding: 10px 12px; border: 1px solid var(--color-surface-border); border-radius: 10px; background: var(--color-surface-muted); color: var(--color-text-secondary); font-size: 11px; }
+.skillproof-feedback strong,.skillproof-verified-note strong { color: var(--color-text); }
+.skillproof-feedback p,.skillproof-verified-note { margin-bottom: 5px; }
+.skillproof-feedback small { color: var(--color-text-muted); }
+.skillproof-verified-note { border-color: color-mix(in srgb, var(--color-success) 28%, var(--color-surface-border)); background: var(--color-success-soft); color: var(--color-success); }
+.skillproof-evidence-form { margin-top: 14px; padding-top: 13px; border-top: 1px solid var(--color-border); }
+.skillproof-evidence-form h4 { margin: 0 0 10px; font-size: 12px; }
+.skillproof-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 10px; }
+.skillproof-form-grid label { display: grid; min-width: 0; gap: 5px; color: var(--color-text-secondary); font-size: 11px; font-weight: 700; }
+.skillproof-wide { grid-column: 1 / -1; }
+.skillproof-evidence-link { display: inline-block; margin-top: 4px; color: var(--color-primary); font-size: 11px; font-weight: 700; overflow-wrap: anywhere; }
+.skillproof-history { margin-top: 12px; color: var(--color-text-secondary); font-size: 11px; }
+.skillproof-history summary { cursor: pointer; color: var(--color-primary); font-weight: 700; }
+.skillproof-history ol { display: grid; gap: 10px; margin: 9px 0 0; padding-left: 19px; }
+.skillproof-history li { padding-left: 3px; }
+.skillproof-history li > strong,.skillproof-history li > span { margin-right: 8px; }
+.skillproof-history li p { margin: 3px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.skillproof-withdraw { margin-top: 12px; color: var(--color-error); }
+.skillproof-filters { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; margin-bottom: 14px; }
+.skillproof-admin-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.skillproof-admin-row > div { min-width: 0; flex: 1; }
+.skillproof-pagination { display: flex; align-items: center; justify-content: center; gap: 18px; padding-top: 15px; color: var(--color-text-secondary); font-size: 11px; }
+.skillproof-review-detail { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; padding: 18px; background: rgb(2 6 23 / 58%); }
+.skillproof-review-panel { width: min(100%, 760px); max-height: min(90vh, 900px); overflow: auto; padding: clamp(18px, 4vw, 28px); border: 1px solid var(--color-surface-border); border-radius: var(--radius-card); background: var(--color-surface); box-shadow: var(--shadow-dialog); }
+.skillproof-profile-summary { display: grid; gap: 3px; margin: 13px 0; padding: 12px; border: 1px solid var(--color-surface-border); border-radius: 11px; background: var(--color-surface-muted); box-shadow: var(--shadow-card); color: var(--color-text-secondary); font-size: 11px; }
+.skillproof-profile-summary strong { color: var(--color-text); font-size: 13px; }
+.skillproof-profile-summary p { margin: 5px 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.skillproof-review-panel h3 { margin: 13px 0 7px; font-size: 13px; }
+.skillproof-evidence-item { margin: 8px 0; padding: 12px; border: 1px solid var(--color-surface-border); border-radius: 11px; background: var(--color-surface); box-shadow: var(--shadow-card); }
+.skillproof-evidence-item strong { display: block; color: var(--color-text); font-size: 12px; }
+.skillproof-evidence-item time { color: var(--color-text-muted); font-size: 10px; }
+.skillproof-evidence-item p { color: var(--color-text-secondary); font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.skillproof-review-reason { margin-top: 15px; }
+.skillproof-review-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+.skillproof-public-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin-top: 9px; }
+.skillproof-public-badges > strong { width: 100%; color: var(--color-success); font-size: 10px; }
+.skillproof-public-badge { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 4px 8px; border: 1px solid color-mix(in srgb, var(--color-success) 26%, var(--color-surface-border)); border-radius: 999px; background: var(--color-success-soft); color: var(--color-success); font-size: 10px; font-weight: 750; }
+.skillproof-public-badge small { color: var(--color-text-secondary); font-size: 9px; font-weight: 500; }
+.status-chip.evidence_submitted,.status-chip.reviewed,.status-chip.claimed { border-color: color-mix(in srgb, var(--color-warning) 28%, var(--color-surface-border)); background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface)); color: var(--color-warning); }
+
+@media (max-width: 700px) {
+  .skillproof-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .skillproof-admin-row { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 520px) {
+  .skillproof-add-form { align-items: stretch; flex-direction: column; }
+  .skillproof-add-form .button { align-self: flex-start; }
+  .skillproof-form-grid,.skillproof-filters { grid-template-columns: minmax(0, 1fr); }
+  .skillproof-wide { grid-column: auto; }
+  .skillproof-record-title { align-items: flex-start; flex-direction: column; }
+  .skillproof-review-actions { align-items: flex-start; flex-direction: column; }
+  .skillproof-review-panel { max-height: 94vh; }
+}

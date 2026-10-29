@@ -1,0 +1,174 @@
+/* Shared light response across landing, auth, and role workspaces. */
+.glass-surface.glass-surface,
+.surface-card,
+.job-card,
+.pathway-card,
+.workspace-sidebar,
+.skillproof-record,
+.skillproof-admin-row,
+.skillproof-profile-summary,
+.skillproof-evidence-item,
+.skillproof-legacy,
+.job-dialog,
+.skillproof-review-panel {
+  position: relative;
+  isolation: isolate;
+  transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease, background-color .22s ease;
+}
+
+.glass-surface.glass-surface:hover,
+.surface-card:hover,
+.job-card:hover,
+.pathway-card:hover,
+.workspace-sidebar:hover,
+.skillproof-record:hover,
+.skillproof-admin-row:hover,
+.skillproof-profile-summary:hover,
+.skillproof-evidence-item:hover,
+.skillproof-legacy:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 43%, var(--color-glass-border));
+  box-shadow: var(--shadow-glass-hover), var(--glow-primary-soft);
+}
+
+.glass-surface.glass-surface:focus-within,
+.surface-card:focus-within,
+.job-card:focus-within,
+.pathway-card:focus-within,
+.skillproof-record:focus-within,
+.skillproof-admin-row:focus-within,
+.skillproof-profile-summary:focus-within,
+.skillproof-evidence-item:focus-within {
+  border-color: color-mix(in srgb, var(--color-primary) 52%, var(--color-glass-border));
+  box-shadow: var(--shadow-glass), var(--glow-primary-soft);
+}
+
+.button-primary,
+.header-action,
+.workspace-theme-toggle,
+.theme-toggle {
+  transition: transform .18s ease, border-color .18s ease, color .18s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.button-primary:hover:not(:disabled),
+.button-secondary:hover:not(:disabled),
+.header-action:hover,
+.workspace-theme-toggle:hover,
+.theme-toggle:hover,
+.filter-toggle:hover,
+.demo-login-buttons button:hover,
+.skillproof-legacy-chip:hover {
+  box-shadow: var(--glow-primary-strong);
+}
+
+.auth-form input:focus-visible,
+.workspace-form input:focus-visible,
+.workspace-form textarea:focus-visible,
+.table-search:focus-visible,
+.job-edit-form input:focus-visible,
+.job-edit-form textarea:focus-visible,
+.dialog-apply-form input:focus-visible,
+.dialog-apply-form textarea:focus-visible,
+.submission-box textarea:focus-visible {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: var(--glow-control);
+}
+
+.skillproof-add-form input:focus-visible,
+.skillproof-filters input:focus-visible,
+.skillproof-filters select:focus-visible,
+.skillproof-evidence-form input:focus-visible,
+.skillproof-evidence-form select:focus-visible,
+.skillproof-evidence-form textarea:focus-visible,
+.skillproof-review-reason textarea:focus-visible,
+.currency-input:focus-visible,
+.filter-group input:focus-visible,
+.filter-group select:focus-visible,
+.sort-control select:focus-visible,
+.hero-search:focus-within {
+  border-color: var(--color-primary);
+  outline: none;
+  box-shadow: var(--glow-control);
+}
+
+.search-input-wrap input:focus-visible { box-shadow: none; }
+
+.workspace-side-link:hover,
+.workspace-side-link:focus-visible,
+.primary-nav .nav-link:hover,
+.primary-nav .nav-link:focus-visible,
+.pathway-link:hover,
+.details-link:hover,
+.skillproof-evidence-link:hover {
+  text-shadow: 0 0 14px color-mix(in srgb, var(--color-primary) 32%, transparent);
+}
+
+.workspace-side-link:hover .workspace-side-icon,
+.workspace-side-link:focus-visible .workspace-side-icon {
+  border-color: color-mix(in srgb, var(--color-primary) 42%, var(--color-surface-border));
+  box-shadow: var(--glow-primary-soft);
+}
+
+.workspace-row:hover,
+.proposal-row:hover,
+.notification-list li:hover,
+.table-scroll tbody tr:hover {
+  background: color-mix(in srgb, var(--color-primary) 4%, var(--color-surface));
+}
+
+.notification-list li.unread { box-shadow: inset 3px 0 12px -9px var(--color-primary); }
+
+.search-hero.glass-surface,
+.auth-card.glass-surface {
+  box-shadow: var(--shadow-glass), var(--glow-primary-soft);
+}
+
+.search-hero.glass-surface:hover,
+.auth-card.glass-surface:hover {
+  box-shadow: var(--shadow-glass-hover), var(--glow-primary-strong);
+}
+
+.eyebrow-mark,
+.preview-status > span {
+  animation: luminous-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes luminous-breathe {
+  0%, 100% { box-shadow: 0 0 0 3px rgb(99 102 241 / 10%), 0 0 8px rgb(99 102 241 / 16%); }
+  50% { box-shadow: 0 0 0 5px rgb(99 102 241 / 7%), 0 0 14px rgb(99 102 241 / 25%); }
+}
+
+:root[data-theme='dark'] .eyebrow-mark,
+:root[data-theme='dark'] .preview-status > span {
+  animation-name: luminous-breathe-dark;
+}
+
+@keyframes luminous-breathe-dark {
+  0%, 100% { box-shadow: 0 0 0 3px rgb(129 140 248 / 14%), 0 0 9px rgb(129 140 248 / 30%); }
+  50% { box-shadow: 0 0 0 5px rgb(129 140 248 / 9%), 0 0 17px rgb(129 140 248 / 42%); }
+}
+
+@media (hover: none) {
+  .glass-surface.glass-surface:hover,
+  .surface-card:hover,
+  .job-card:hover,
+  .pathway-card:hover,
+  .workspace-sidebar:hover {
+    border-color: var(--color-glass-border);
+    box-shadow: var(--shadow-glass);
+  }
+
+  .skillproof-record:hover,
+  .skillproof-admin-row:hover,
+  .skillproof-profile-summary:hover,
+  .skillproof-evidence-item:hover,
+  .skillproof-legacy:hover {
+    border-color: var(--color-surface-border);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow-mark,
+  .preview-status > span { animation: none; }
+}

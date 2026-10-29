@@ -1,0 +1,12 @@
+node_modules/
+**/node_modules/
+**/.env
+**/.env.*
+!**/.env.example
+client/dist/
+*.log
+.DS_Store
+# Keep local design exports, editor settings, and the original planning prompt out of source control.
+.stitch/
+.vscode/
+FreelanceHub.txt
